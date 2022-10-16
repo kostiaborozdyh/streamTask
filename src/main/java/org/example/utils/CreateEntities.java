@@ -58,28 +58,30 @@ public class CreateEntities {
                 return "Continent4";
         }
     }
-    public static List<Movie> createListMovie(int countMovie){
+
+    public static List<Movie> createListMovie(int countMovie) {
         List<Movie> movieList = new ArrayList<>();
         for (int i = 0; i < countMovie; i++) {
             Movie movie = new Movie();
-            movie.setImdb("imdb"+i);
+            movie.setImdb("imdb" + i);
             movie.setId(i);
-            movie.setTitle("Movie"+i);
-            movie.setYear((int) (Math.random() * 21)+2000);
+            movie.setTitle("Movie" + i);
+            movie.setYear((int) (Math.random() * 21) + 2000);
             movie.setGenres(createListGenre());
             movie.setDirectors(createListDirectorForMovie());
             movieList.add(movie);
         }
         return movieList;
     }
-    public static List<Director> createListDirector(){
+
+    public static List<Director> createListDirector() {
         List<Director> directorList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Director director = new Director();
             director.setId(i);
-            director.setImdb("imdb"+i);
-            director.setName("Director"+i);
-            int countMovie = (int) (Math.random()*5)+1;
+            director.setImdb("imdb" + i);
+            director.setName("Director" + i);
+            int countMovie = (int) (Math.random() * 5) + 1;
             director.setMovies(createListMovie(countMovie));
             directorList.add(director);
         }
@@ -89,7 +91,7 @@ public class CreateEntities {
 
     private static List<Genre> createListGenre() {
         Set<Genre> genreSet = new HashSet<>();
-        int countGenre = (int) (Math.random() * 12)+1;
+        int countGenre = (int) (Math.random() * 12) + 1;
         for (int i = 0; i < countGenre; i++) {
             int idGenre = (int) (Math.random() * 12);
             genreSet.add(createGenre(idGenre));
@@ -98,13 +100,13 @@ public class CreateEntities {
     }
 
     private static List<Director> createListDirectorForMovie() {
-        int countDirector = (int) (Math.random() * 5)+1;
+        int countDirector = (int) (Math.random() * 5) + 1;
         List<Director> directorList = new ArrayList<>();
         for (int i = 0; i < countDirector; i++) {
             Director director = new Director();
             director.setId(i);
-            director.setImdb("imdb"+i);
-            director.setName("Director"+i);
+            director.setImdb("imdb" + i);
+            director.setName("Director" + i);
             directorList.add(director);
         }
         return directorList;

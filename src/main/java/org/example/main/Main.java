@@ -8,7 +8,6 @@ import org.example.utils.CreateEntities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -59,14 +58,14 @@ public class Main {
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println("Solution Tasks");
         System.out.println("3. Find the number of movies of each director");
-        Map<Integer,Integer> task3 = Tasks.numberOfMoviesOfEachDirector(directorList);
+        Map<Integer, Integer> task3 = Tasks.numberOfMoviesOfEachDirector(directorList);
         for (Map.Entry<Integer, Integer> map : task3.entrySet()) {
-            System.out.println("directorId:"+map.getKey()+" number of movies:"+map.getValue());
+            System.out.println("directorId:" + map.getKey() + " number of movies:" + map.getValue());
         }
         System.out.println("4. Find the number of genres of each director's movies");
-        Map<Integer,Integer> task4 = Tasks.numberOfGenresOfEachDirectorsMovies(directorList);
+        Map<Integer, Integer> task4 = Tasks.numberOfGenresOfEachDirectorsMovies(directorList);
         for (Map.Entry<Integer, Integer> map : task4.entrySet()) {
-            System.out.println("directorId:"+map.getKey()+" number of genres:"+map.getValue());
+            System.out.println("directorId:" + map.getKey() + " number of genres:" + map.getValue());
         }
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println("Movie List:");
@@ -80,9 +79,9 @@ public class Main {
         printMovieListWithId(task8);
         System.out.println();
         System.out.println("9. Group the movies by the year and list them");
-        Map<Integer,List<Movie>> task9 = Tasks.GroupingMoviesByYear(movieList);
-        for (Map.Entry<Integer,List<Movie>> map : task9.entrySet()) {
-            System.out.print("year:"+map.getKey()+" movies ");
+        Map<Integer, List<Movie>> task9 = Tasks.GroupingMoviesByYear(movieList);
+        for (Map.Entry<Integer, List<Movie>> map : task9.entrySet()) {
+            System.out.print("year:" + map.getKey() + " movies ");
             printMovieListWithId(map.getValue());
             System.out.println();
         }
@@ -116,9 +115,10 @@ public class Main {
             System.out.println();
         }
     }
-    private static void printMovieListWithId(List<Movie> movieList){
+
+    private static void printMovieListWithId(List<Movie> movieList) {
         for (Movie movie : movieList) {
-            System.out.print("id:"+movie.getId()+" ");
+            System.out.print("id:" + movie.getId() + " ");
         }
     }
 
@@ -128,7 +128,8 @@ public class Main {
         }
         System.out.println();
     }
-    private static Movie createComedyDramaMovie(){
+
+    private static Movie createComedyDramaMovie() {
         Movie movieDramaComedy = new Movie();
         movieDramaComedy.setYear(2012);
         movieDramaComedy.setGenres(createComedyDrama());
@@ -137,10 +138,11 @@ public class Main {
         movieDramaComedy.setImdb("Imdb5");
         return movieDramaComedy;
     }
-    private static List<Genre> createComedyDrama(){
+
+    private static List<Genre> createComedyDrama() {
         List<Genre> genreList = new ArrayList<>();
-        genreList.add(new Genre(0,"Comedy"));
-        genreList.add(new Genre(1,"Drama"));
+        genreList.add(new Genre(0, "Comedy"));
+        genreList.add(new Genre(1, "Drama"));
         return genreList;
     }
 }

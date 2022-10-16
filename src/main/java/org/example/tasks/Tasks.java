@@ -21,10 +21,11 @@ public class Tasks {
     @Getter
     @Setter
     @Data
-    final static class ContinentCity{
+    final static class ContinentCity {
         private final String continent;
         private final City city;
-        public int getPopulation(){
+
+        public int getPopulation() {
             return city.getPopulation();
         }
     }
@@ -32,7 +33,7 @@ public class Tasks {
     @Getter
     @Setter
     @Data
-    final static class DirectorsGenres{
+    final static class DirectorsGenres {
         private final Integer idDirector;
         private final Integer numberGenres;
     }
@@ -40,7 +41,7 @@ public class Tasks {
     @Getter
     @Setter
     @Data
-    final static class CountryCapitalCity{
+    final static class CountryCapitalCity {
         private final String countryName;
         private final City capitalCity;
     }
@@ -69,7 +70,7 @@ public class Tasks {
                 .sorted(Comparator.comparingInt(ContinentCity::getPopulation).reversed())
                 .map(continentCity -> {
                     String continent = continentCity.getContinent();
-                    if(continentSet.contains(continent)){
+                    if (continentSet.contains(continent)) {
                         continentSet.remove(continent);
                         return continentCity.getCity();
                     }
@@ -82,18 +83,18 @@ public class Tasks {
     //task3
     public static Map<Integer, Integer> numberOfMoviesOfEachDirector(List<Director> directorList) {
         return directorList.stream()
-                .collect(Collectors.toMap(Director::getId,x->x.getMovies().size()));
+                .collect(Collectors.toMap(Director::getId, x -> x.getMovies().size()));
     }
 
     //task4
     public static Map<Integer, Integer> numberOfGenresOfEachDirectorsMovies(List<Director> directorList) {
-      return directorList.stream()
-               .map(director -> {
-                   Set<Genre> genreSet = new HashSet<>();
-                   director.getMovies().forEach(c->genreSet.addAll(c.getGenres()));
-                   return new DirectorsGenres(director.getId(), genreSet.size());
-               })
-               .collect(Collectors.toMap(DirectorsGenres::getIdDirector,DirectorsGenres::getNumberGenres));
+        return directorList.stream()
+                .map(director -> {
+                    Set<Genre> genreSet = new HashSet<>();
+                    director.getMovies().forEach(c -> genreSet.addAll(c.getGenres()));
+                    return new DirectorsGenres(director.getId(), genreSet.size());
+                })
+                .collect(Collectors.toMap(DirectorsGenres::getIdDirector, DirectorsGenres::getNumberGenres));
     }
 
 
@@ -101,8 +102,8 @@ public class Tasks {
     public static City highestPopulatedCapitalCity(List<Country> countryList) {
         CountryCapitalCity countryCapitalCity = countryList.stream()
                 .map(country -> new CountryCapitalCity(country.getName(), country.getCities().get(country.getCapital())))
-                .max(Comparator.comparing(x->x.getCapitalCity().getPopulation()))
-                .orElse(null) ;
+                .max(Comparator.comparing(x -> x.getCapitalCity().getPopulation()))
+                .orElse(null);
         assert countryCapitalCity != null;
         return countryCapitalCity.getCapitalCity();
     }
@@ -115,7 +116,7 @@ public class Tasks {
                 .sorted(Comparator.comparingInt(ContinentCity::getPopulation).reversed())
                 .map(continentCity -> {
                     String continent = continentCity.getContinent();
-                    if(continentSet.contains(continent)){
+                    if (continentSet.contains(continent)) {
                         continentSet.remove(continent);
                         return continentCity.getCity();
                     }
@@ -146,7 +147,7 @@ public class Tasks {
 
     //task9
     public static Map<Integer, List<Movie>> GroupingMoviesByYear(List<Movie> movieList) {
-        return  movieList.stream()
+        return movieList.stream()
                 .collect(Collectors.groupingBy(Movie::getYear));
     }
 
@@ -154,13 +155,13 @@ public class Tasks {
     //task10
     public static List<Country> SortingCountriesByTheirPopulationDensities(List<Country> countryList) {
         return countryList.stream()
-                .filter(x -> (x.getPopulation() / x.getSurfaceArea())!=0)
-                .sorted(Comparator.<Country, Double> comparing(x -> (x.getPopulation() / x.getSurfaceArea())).reversed())
+                .filter(x -> (x.getPopulation() / x.getSurfaceArea()) != 0)
+                .sorted(Comparator.<Country, Double>comparing(x -> (x.getPopulation() / x.getSurfaceArea())).reversed())
                 .collect(toList());
     }
 
-    private static Set<String> continentSet(List<Country> countryList){
-        return  countryList.stream()
+    private static Set<String> continentSet(List<Country> countryList) {
+        return countryList.stream()
                 .map(Country::getContinent)
                 .collect(Collectors.toSet());
     }
